@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* 将 content.js 中的 CSS 粘贴到这里，例如： */
+    body { margin: 0; overflow: hidden; font-family: sans-serif; }
+        #lf-translate-icon {
+	      position: absolute;
+	      z-index: 2147483647;
+	      width: 30px;
+	      height: 30px;
+	      background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+	      border: none;
+	      border-radius: 50%;
+	      cursor: pointer;
+	      display: none;
+	      align-items: center;
+	      justify-content: center;
+	      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.35);
+	      transition: transform 0.15s, box-shadow 0.15s;
+	      padding: 0;
+	    }
+	    #lf-translate-icon:hover {
+	      transform: scale(1.15);
+	      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.5);
+	    }
+	    #lf-translate-icon svg {
+	      width: 16px;
+	      height: 16px;
+	      fill: #000;
+	    }
+	    /* 翻译气泡 */
+	    #lf-bubble {
+	      position: absolute;
+	      z-index: 2147483646;
+	      min-width: 240px;
+	      max-width: 380px;
+	      background: #131316;
+	      border: 1px solid #27272a;
+	      border-radius: 10px;
+	      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.08);
+	      display: none;
+	      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+	      overflow: hidden;
+	      animation: lfBubbleIn 0.2s ease;
+	    }
+	    @keyframes lfBubbleIn {
+	      from { opacity: 0; transform: translateY(6px) scale(0.97); }
+	      to { opacity: 1; transform: translateY(0) scale(1); }
+	    }
+	    #lf-bubble-header {
+	      display: flex;
+	      align-items: center;
+	      justify-content: space-between;
+	      padding: 8px 12px;
+	      border-bottom: 1px solid #27272a;
+	      background: #18181b;
+	    }
+	    #lf-bubble-lang {
+	      font-size: 11px;
+	      color: #f59e0b;
+	      font-weight: 600;
+	      letter-spacing: 0.3px;
+	    }
+	    #lf-bubble-actions {
+	      display: flex;
+	      gap: 4px;
+	    }
+	    .lf-bubble-btn {
+	      width: 24px;
+	      height: 24px;
+	      border: none;
+	      background: transparent;
+	      color: #a1a1aa;
+	      border-radius: 4px;
+	      cursor: pointer;
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      font-size: 11px;
+	      transition: all 0.15s;
+	      padding: 0;
+	    }
+	    .lf-bubble-btn:hover {
+	      background: #27272a;
+	      color: #fafafa;
+	    }
+	    #lf-bubble-body {
+	      padding: 12px;
+	      max-height: 200px;
+	      overflow-y: auto;
+	    }
+	    #lf-bubble-body::-webkit-scrollbar { width: 3px; }
+	    #lf-bubble-body::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+	    #lf-bubble-text {
+	      font-size: 14px;
+	      color: #fafafa;
+	      line-height: 1.6;
+	      white-space: pre-wrap;
+	      word-break: break-word;
+	    }
+	    #lf-bubble-loading {
+	      display: flex;
+	      align-items: center;
+	      gap: 8px;
+	      font-size: 13px;
+	      color: #a1a1aa;
+	    }
+	    .lf-spinner {
+	      width: 14px;
+	      height: 14px;
+	      border: 2px solid #27272a;
+	      border-top-color: #f59e0b;
+	      border-radius: 50%;
+	      animation: lfSpin 0.6s linear infinite;
+	    }
+	    @keyframes lfSpin { to { transform: rotate(360deg); } }
+	    #lf-bubble-error {
+	      font-size: 13px;
+	      color: #ef4444;
+	    }
+    /* ... 补充剩余样式 ... */
+  </style>
+</head>
+<body>
+  <div id="lf-bubble">
+    <div id="lf-bubble-header">
+      <span id="lf-bubble-lang">正在检测...</span>
+    </div>
+    <div id="lf-bubble-text">等待翻译...</div>
+  </div>
+  <script src="bubble.js"></script>
+</body>
+</html>
