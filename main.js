@@ -9,7 +9,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 400,
         height: 580,
-        show: false, // 默认隐藏，可以通过系统托盘或快捷键呼出
+        show: true, // 默认隐藏，可以通过系统托盘或快捷键呼出
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false

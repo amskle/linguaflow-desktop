@@ -243,8 +243,10 @@ function clearResult() {
 }
 function updateCharCount() {
     const len = $sourceText.value.length;
-    $charCount.textContent = `${len} / 500`;
-    $charCount.classList.toggle('warning', len > 450);
+    // 把后面的 / 500 删掉
+    $charCount.textContent = `${len} 字`;
+    // 警告样式也可以去掉或者把阈值调高，比如 4500
+    $charCount.classList.toggle('warning', len > 4500);
 }
 /* ========== 交换语言 ========== */
 function swapLanguages() {
@@ -318,12 +320,8 @@ function clearAll() {
 }
 /* ========== 保存语言设置 ========== */
 function saveLangSettings() {
-    try {
-        chrome.storage.local.set({
-            sourceLang: $sourceLang.value,
-            targetLang: $targetLang.value
-        });
-    } catch (e) { /* 非 Chrome 环境忽略 */ }
+    localStorage.setItem('sourceLang', $sourceLang.value);
+    localStorage.setItem('targetLang', $targetLang.value);
 }
 /* ========== 历史记录 ========== */
 function addToHistory(item) {
@@ -341,9 +339,7 @@ function addToHistory(item) {
     renderHistory();
 }
 function saveHistory() {
-    try {
-        chrome.storage.local.set({ history });
-    } catch (e) { /* 忽略 */ }
+    localStorage.setItem('history', JSON.stringify(history));
 }
 function renderHistory() {
     if (history.length === 0) {
